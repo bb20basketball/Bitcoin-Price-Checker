@@ -26,7 +26,7 @@ class main(wx.Frame):
     def updater(self):
         prices=0
         while 1:
-            self.Config.read("C:\\Users\\Joshua\\Desktop\\config_thing.ini")
+            self.Config.read("C:\\Users\\some_user\\Desktop\\config_thing.ini")
             price_dict=json.load(urllib.urlopen("http://api.coindesk.com/v1/bpi/currentprice.json"))
             the_currency=self.Config.get("settings","currency")
             if prices > price_dict["bpi"][the_currency]["rate"]:
