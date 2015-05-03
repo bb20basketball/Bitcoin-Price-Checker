@@ -42,8 +42,9 @@ class main(wx.Frame):
             else:
                 self.frame.SetBackgroundColour(wx.WHITE)
                 self.bitcoin_price.SetBackgroundColour(wx.WHITE)
-            prices=self.dictionary[the_currency]+(price_dict["bpi"][the_currency]["rate"])
-            self.bitcoin_price.SetValue(prices)
+            prices=price_dict["bpi"][the_currency]["rate"]
+            priced=self.dictionary[the_currency]+prices
+            self.bitcoin_price.SetValue(priced)
             self.Refresh()
             time.sleep(float(self.Config.get("settings","refresh"))) 
     def close_window(self,event):
