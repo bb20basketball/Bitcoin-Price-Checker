@@ -5,7 +5,7 @@ import os
 from os.path import expanduser
 class oranged(wx.Frame):
     def __init__(self,parent,id):
-        wx.Frame.__init__(self,parent,id, 'TEST',size=(200,200))
+        wx.Frame.__init__(self,parent,id, 'Settings',size=(200,200))
         self.frams=wx.Panel(self)
         save=wx.Button(self.frams, label="Save", pos=(50,120), size=(100,30))
         self.Bind(wx.EVT_BUTTON, self.saver, save)
