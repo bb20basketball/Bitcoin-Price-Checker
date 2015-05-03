@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from test import oranged
+from Settings import oranged
 import wx
 import thread
 import sys as LOL
