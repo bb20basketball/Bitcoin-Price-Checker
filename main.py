@@ -7,11 +7,15 @@ import json
 import urllib
 import time
 import ConfigParser
+import os
+from os.path import expanduser
 class main(wx.Frame):
     def __init__(self,parent,id):
         wx.Frame.__init__(self,parent,id, 'BTC PRICE',size=(205,150))
         self.frame=wx.Panel(self)
         self.click=wx.Button(self.frame, label="S", pos=(155,30), size=(30,30))
+        self.find_path=expanduser('~')
+        self.find_path=os.path.join(self.find_path+"\\Downloads\\Bitcoin-Price-Checker-master\\Bitcoin-Price-Checker-master",'config_thing.ini')
         self.Bind(wx.EVT_BUTTON,self.button, self.click)
         self.Bind(wx.EVT_CLOSE, self.close_window)
         font1 = wx.Font(18, wx.MODERN, wx.NORMAL, wx.NORMAL)
@@ -26,7 +30,7 @@ class main(wx.Frame):
     def updater(self):
         prices=0
         while 1:
-            self.Config.read("C:\\Users\\some_user\\Desktop\\config_thing.ini")
+            self.Config.read(self.find_path)
             price_dict=json.load(urllib.urlopen("http://api.coindesk.com/v1/bpi/currentprice.json"))
             the_currency=self.Config.get("settings","currency")
             if prices > price_dict["bpi"][the_currency]["rate"]:
@@ -41,7 +45,7 @@ class main(wx.Frame):
             prices=self.dictionary[the_currency]+(price_dict["bpi"][the_currency]["rate"])
             self.bitcoin_price.SetValue(prices)
             self.Refresh()
-            time.sleep(float(self.Config.get("settings","refresh"))) #Seems like three is the magic number#
+            time.sleep(float(self.Config.get("settings","refresh"))) 
     def close_window(self,event):
         LOL.exit()
 if __name__ =="__main__":
