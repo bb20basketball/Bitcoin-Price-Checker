@@ -1,14 +1,17 @@
 import wx
 import sys as LOL
 import ConfigParser
+import os
+from os.path import expanduser
 class oranged(wx.Frame):
     def __init__(self,parent,id):
         wx.Frame.__init__(self,parent,id, 'TEST',size=(200,200))
         self.frams=wx.Panel(self)
-        #The unfinished settings#
         save=wx.Button(self.frams, label="Save", pos=(50,120), size=(100,30))
         self.Bind(wx.EVT_BUTTON, self.saver, save)
         self.currency=["EUR", "USD","GBP"]
+        self.find_paths=expanduser('~')
+        self.find_paths=os.path.join(self.find_paths+"\\Downloads\\Bitcoin-Price-Checker-master\\Bitcoin-Price-Checker-master",'config_thing.ini')
         self.timing=['1','2','3','4','5','6','7','8','9','10']
         one=wx.StaticText(self.frams,-1,"Refresh Rate(Seconds)",pos=(10,30))
         two=wx.StaticText(self.frams,-1,"Currency",pos=(10,75))
@@ -23,7 +26,7 @@ class oranged(wx.Frame):
         #Need a way to call the read function so it doesn't keep opening the file
         #Looking for changes#
     def saver(self,event):
-        config_file=open("C:\\Users\\Joshua\\Desktop\\config_thing.ini","w")
+        config_file=open(self.find_paths,"w")
         self.Configs.set("settings","refresh", str(self.time.GetValue()))
         self.Configs.set("settings","currency", str(self.adding.GetValue()))
         self.Configs.write(config_file)
